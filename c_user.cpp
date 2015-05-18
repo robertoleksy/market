@@ -29,6 +29,7 @@ void c_user::sell()
   unsigned int price = std::floor(rand + 0.5);
   std::uniform_int_distribution<int> distribution_linear(10000,100000);
   unsigned int number_of_tokens = distribution_linear(m_rand_generator);
+  number_of_tokens = get_money(number_of_tokens, e_currency::BTC);
   m_market_ptr->sell(e_currency::BTC, number_of_tokens, m_ID, price);  
 }
 
@@ -40,6 +41,33 @@ void c_user::add_money(unsigned int number_of, e_currency currency)
   if (currency == e_currency::USD) {
     m_money_USD.number_of += number_of;
   }
+}
+
+unsigned int c_user::get_money(unsigned int number_of, e_currency currency)
+{
+  if (currency == e_currency::BTC) {
+    if(number_of < m_money_BTC.number_of) {
+      m_money_BTC.number_of -= number_of;
+      return number_of;
+    }
+    else {
+      unsigned int ret = m_money_BTC.number_of;
+      m_money_BTC.number_of = 0;
+      return ret;
+    }
+  }
+  if (currency == e_currency::USD) {
+    if(number_of < m_money_USD.number_of) {
+      m_money_USD.number_of -= number_of;
+      return number_of;
+    }
+    else {
+      unsigned int ret = m_money_USD.number_of;
+      m_money_USD.number_of = 0;
+      return ret;
+    }
+  }
+  return 0;
 }
 
 unsigned int c_user::get_ID()

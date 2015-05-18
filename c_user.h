@@ -13,6 +13,7 @@ class c_user
 public:
   c_user(unsigned int ID, std::shared_ptr<c_market> market_ptr);
   void add_money(unsigned int number_of, e_currency currency);
+  unsigned int get_money(unsigned int number_of, e_currency currency);
   unsigned int get_ID();
 private:
   struct s_money {
