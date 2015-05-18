@@ -16,19 +16,19 @@ m_market_ptr(market_ptr)
 void c_user::buy()
 {
   if (m_money_USD.number_of <= m_money_BTC.number_of) {
-      m_market_ptr->buy(e_currency::BTC, 100000);
+      m_market_ptr->buy(e_currency::BTC, 100000, m_ID);
   }
   else {
-   m_market_ptr->buy(e_currency::USD, 100000); 
+   m_market_ptr->buy(e_currency::USD, 100000, m_ID);
   }
 }
 
 void c_user::sell()
 {
   if (m_money_USD.number_of <= m_money_BTC.number_of) {
-      m_market_ptr->sell(e_currency::BTC, 100000);
+      m_market_ptr->sell(e_currency::BTC, 100000, m_ID);
   }
   else {
-   m_market_ptr->sell(e_currency::USD, 100000); 
+   m_market_ptr->sell(e_currency::USD, 100000, m_ID);
   }  
 }
