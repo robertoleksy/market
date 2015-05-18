@@ -3,6 +3,7 @@
 
 #include <random>
 #include <memory>
+#include <iostream>
 #include "c_market.h"
 
 class c_market;

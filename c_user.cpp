@@ -19,6 +19,8 @@ void c_user::buy()
   unsigned int price = std::floor(rand + 0.5);
   std::uniform_int_distribution<int> distribution_linear(10000,100000);
   unsigned int number_of_tokens = distribution_linear(m_rand_generator);
+  std::cout << "(user " << m_ID << ") buy " << number_of_tokens << std::endl;
+  std::cout << "price " << price << std::endl;
   m_market_ptr->buy(e_currency::BTC, number_of_tokens, m_ID, price);
 }
 
@@ -30,6 +32,7 @@ void c_user::sell()
   std::uniform_int_distribution<int> distribution_linear(10000,100000);
   unsigned int number_of_tokens = distribution_linear(m_rand_generator);
   number_of_tokens = get_money(number_of_tokens, e_currency::BTC);
+  std::cout << "(user " << m_ID << ") sell " << number_of_tokens << std::endl;
   m_market_ptr->sell(e_currency::BTC, number_of_tokens, m_ID, price);  
 }
 

@@ -17,5 +17,7 @@ int main(int argc, char **argv) {
       users_vector[(users_vector.size() - 1) - i]->buy();
     }
     
+    market->run();
+    
     return 0;
 }
