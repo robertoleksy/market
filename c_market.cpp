@@ -35,17 +35,20 @@ void c_market::run()
   if (it_last_buy->first >= it_first_sell->first) {
     if (it_last_buy->second.front().number_of_tokens == it_first_sell->second.front().number_of_tokens) { // buy bid == sell bid
       m_users_map.at(it_last_buy->second.front().ID)->add_money(it_first_sell->second.front().number_of_tokens, e_currency::USD);
+      m_last_price = it_last_buy->first;
       m_market_map_buy.erase(it_last_buy);
       m_market_map_sell.erase(it_first_sell);
     }
     else if (it_last_buy->second.front().number_of_tokens > it_first_sell->second.front().number_of_tokens) { // buy bid > sell bid
       m_users_map.at(it_last_buy->second.front().ID)->add_money(it_first_sell->second.front().number_of_tokens, e_currency::USD);
       it_last_buy->second.front().number_of_tokens -= it_first_sell->second.front().number_of_tokens;
+      m_last_price = it_last_buy->first;
       m_market_map_sell.erase(it_first_sell);
     }
     else { // buy bid < sell bid
       m_users_map.at(it_last_buy->second.front().ID)->add_money(it_last_buy->second.front().number_of_tokens, e_currency::USD);
       it_first_sell->second.front().number_of_tokens -= it_last_buy->second.front().number_of_tokens;
+      m_last_price = it_last_buy->first;
       m_market_map_sell.erase(it_last_buy);
     }
   }

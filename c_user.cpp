@@ -7,30 +7,29 @@ m_market_ptr(market_ptr)
 {
   m_money_USD.currency = e_currency::USD;
   m_money_BTC.currency = e_currency::BTC;
-  std::default_random_engine generator;
   std::uniform_int_distribution<unsigned int> distribution(100000, 10000000);
-  m_money_BTC.number_of = distribution(generator);
-  m_money_USD.number_of = distribution(generator);
+  m_money_BTC.number_of = distribution(m_rand_generator);
+  m_money_USD.number_of = distribution(m_rand_generator);
 }
 
 void c_user::buy()
 {
-  if (m_money_USD.number_of <= m_money_BTC.number_of) {
-      m_market_ptr->buy(e_currency::BTC, 100000, m_ID, m_market_ptr->get_current_price());
-  }
-  else {
-   m_market_ptr->buy(e_currency::USD, 100000, m_ID, m_market_ptr->get_current_price());
-  }
+  std::normal_distribution<float> distribution_norm(m_market_ptr->get_current_price(), 50);
+  float rand = distribution_norm(m_rand_generator);
+  unsigned int price = std::floor(rand + 0.5);
+  std::uniform_int_distribution<int> distribution_linear(10000,100000);
+  unsigned int number_of_tokens = distribution_linear(m_rand_generator);
+  m_market_ptr->buy(e_currency::BTC, number_of_tokens, m_ID, price);
 }
 
 void c_user::sell()
 {
-  if (m_money_USD.number_of <= m_money_BTC.number_of) {
-      m_market_ptr->sell(e_currency::BTC, 100000, m_ID, m_market_ptr->get_current_price());
-  }
-  else {
-   m_market_ptr->sell(e_currency::USD, 100000, m_ID, m_market_ptr->get_current_price());
-  }  
+  std::normal_distribution<float> distribution_norm(m_market_ptr->get_current_price(), 50);
+  float rand = distribution_norm(m_rand_generator);
+  unsigned int price = std::floor(rand + 0.5);
+  std::uniform_int_distribution<int> distribution_linear(10000,100000);
+  unsigned int number_of_tokens = distribution_linear(m_rand_generator);
+  m_market_ptr->sell(e_currency::BTC, number_of_tokens, m_ID, price);  
 }
 
 void c_user::add_money(unsigned int number_of, e_currency currency)
