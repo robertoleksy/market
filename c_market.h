@@ -22,17 +22,14 @@ public:
   void sell(e_currency currency, unsigned int nuber_of, unsigned int ID, unsigned int price);
   unsigned int get_current_price();
   void add_user(std::shared_ptr<c_user> new_user);
+  void run(); // TODO thread
 private:
   struct s_bid {
-    enum class e_kind_of_bid {
-      sell,
-      buy
-    };
     unsigned int ID;
     unsigned int number_of_tokens;
-    e_kind_of_bid kid;
   };
-  std::map<unsigned int, std::vector<s_bid>> m_market_map;
+  std::map<unsigned int, std::vector<s_bid>> m_market_map_sell;
+  std::map<unsigned int, std::vector<s_bid>> m_market_map_buy;
   unsigned int m_last_price;
   std::vector<std::shared_ptr<c_user>> m_users_vector;
 };
