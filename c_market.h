@@ -31,7 +31,7 @@ private:
   std::map<unsigned int, std::vector<s_bid>> m_market_map_sell;
   std::map<unsigned int, std::vector<s_bid>> m_market_map_buy;
   unsigned int m_last_price;
-  std::vector<std::shared_ptr<c_user>> m_users_vector;
+  std::map<unsigned int, std::shared_ptr<c_user>> m_users_map;
 };
 
 #endif // C_MARKET_H

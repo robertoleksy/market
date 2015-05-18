@@ -32,3 +32,18 @@ void c_user::sell()
    m_market_ptr->sell(e_currency::USD, 100000, m_ID, m_market_ptr->get_current_price());
   }  
 }
+
+void c_user::add_money(unsigned int number_of, e_currency currency)
+{
+  if (currency == e_currency::BTC) {
+    m_money_BTC.number_of += number_of;
+  }
+  if (currency == e_currency::USD) {
+    m_money_USD.number_of += number_of;
+  }
+}
+
+unsigned int c_user::get_ID()
+{
+  return m_ID;
+}

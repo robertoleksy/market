@@ -25,10 +25,18 @@ unsigned int c_market::get_current_price()
 
 void c_market::add_user(std::shared_ptr< c_user > new_user)
 {
-  m_users_vector.emplace_back(std::move(new_user));
+ m_users_map[new_user->get_ID()] = std::move(new_user);
 }
 
 void c_market::run()
 {
-  
+  std::map<unsigned int, std::vector<s_bid>>::iterator it_last_buy = --m_market_map_buy.end();
+  std::map<unsigned int, std::vector<s_bid>>::iterator it_first_sell = m_market_map_sell.begin();
+  if ((it_last_buy->first >= it_first_sell->first)) {
+    if (it_last_buy->second.front().number_of_tokens == it_first_sell->second.front().number_of_tokens) {
+      m_users_map.at(it_last_buy->second.front().ID)->add_money(it_first_sell->second.front().number_of_tokens, e_currency::USD);
+      m_market_map_buy.erase(it_last_buy);
+      m_market_map_sell.erase(it_first_sell);
+    }
+  }
 }
