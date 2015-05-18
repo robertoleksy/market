@@ -15,7 +15,7 @@ class c_user;
 class c_market
 {
 public:
-  c_market() = delete;
+  c_market() = default;
   c_market(const c_market & mark) = delete;
   c_market & operator = (const c_market &) = delete;
   void buy(e_currency currency, unsigned int nuber_of, unsigned int ID, unsigned int price);

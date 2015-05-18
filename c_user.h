@@ -15,6 +15,8 @@ public:
   void add_money(unsigned int number_of, e_currency currency);
   unsigned int get_money(unsigned int number_of, e_currency currency);
   unsigned int get_ID();
+  void buy();
+  void sell();
 private:
   struct s_money {
     e_currency currency;
@@ -25,8 +27,7 @@ private:
   unsigned int m_ID;
   std::shared_ptr<c_market> m_market_ptr;
   std::default_random_engine m_rand_generator;
-  void buy();
-  void sell();
+
 };
 
 #endif // C_USER_H
