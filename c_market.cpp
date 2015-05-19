@@ -40,10 +40,12 @@ void c_market::run()
       std::cout << "add " << it_first_sell->second.front().number_of_tokens << "$" << std::endl;
       m_users_map.at(it_last_buy->second.front().ID)->add_money(it_first_sell->second.front().number_of_tokens, e_currency::USD);
       m_last_price = it_last_buy->first;
+
+      std::cout << "Done transaction: User " << it_last_buy->second.front().ID << " bought from User " << it_first_sell->second.front().ID 
+      << ' ' << it_first_sell->second.front().number_of_tokens << " tokens for " << m_last_price << std::endl;
       m_market_map_buy.erase(it_last_buy);
       m_market_map_sell.erase(it_first_sell);
-      std::cout << "Done transaction: User " << it_last_buy->second.front().ID << " bought from User " << it_first_sell->second.front().ID 
-	   << ' ' << it_first_sell->second.front().number_of_tokens << " tokens for " << m_last_price << std::endl;
+      
     }
     else if (it_last_buy->second.front().number_of_tokens > it_first_sell->second.front().number_of_tokens) { // buy bid > sell bid
       std::cout << "add money for ID " << it_last_buy->second.front().ID <<std::endl;
@@ -51,9 +53,10 @@ void c_market::run()
       m_users_map.at(it_last_buy->second.front().ID)->add_money(it_first_sell->second.front().number_of_tokens, e_currency::USD);
       it_last_buy->second.front().number_of_tokens -= it_first_sell->second.front().number_of_tokens;
       m_last_price = it_last_buy->first;
-      m_market_map_sell.erase(it_first_sell);
+      
       std::cout << "Done transaction: User " << it_last_buy->second.front().ID << " bought from User " << it_first_sell->second.front().ID 
       << ' ' << it_first_sell->second.front().number_of_tokens << " tokens for " << m_last_price << std::endl;
+      m_market_map_sell.erase(it_first_sell);
     }
     else { // buy bid < sell bid
       std::cout << "add money for ID " << it_last_buy->second.front().ID <<std::endl;
@@ -61,9 +64,9 @@ void c_market::run()
       m_users_map.at(it_last_buy->second.front().ID)->add_money(it_last_buy->second.front().number_of_tokens, e_currency::USD);
       it_first_sell->second.front().number_of_tokens -= it_last_buy->second.front().number_of_tokens;
       m_last_price = it_last_buy->first;
-      m_market_map_sell.erase(it_last_buy);
       std::cout << "Done transaction: User " << it_last_buy->second.front().ID << " bought from User " << it_first_sell->second.front().ID 
       << ' ' << it_first_sell->second.front().number_of_tokens << " tokens for " << m_last_price << std::endl;
+      m_market_map_buy.erase(it_last_buy);
     }
     it_last_buy = --m_market_map_buy.end();
     it_first_sell = m_market_map_sell.begin();
