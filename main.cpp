@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
     
     std::chrono::time_point<std::chrono::steady_clock> stop_time = std::chrono::steady_clock::now();
     std::chrono::steady_clock::duration diff = stop_time - start_time;
-    std::cout << "time: " << diff.count() << "ms" << std::endl;
+    std::cout << "time: " << std::chrono::duration_cast<std::chrono::milliseconds>(diff) .count() << "ms" << std::endl;
     
     // Show users wallets
     for(auto user : users_vector){
