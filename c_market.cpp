@@ -25,7 +25,7 @@ unsigned int c_market::get_current_price()
 
 void c_market::add_user(std::shared_ptr< c_user > new_user)
 {
- m_users_map[new_user->get_ID()] = std::move(new_user);
+  m_users_map[new_user->get_ID()] = std::move(new_user);
 }
 
 void c_market::run()
@@ -70,5 +70,8 @@ void c_market::run()
     }
     it_last_buy = --m_market_map_buy.end();
     it_first_sell = m_market_map_sell.begin();
+  }
+  else {
+    std::cout << "no transaction" << std::endl;
   }
 }

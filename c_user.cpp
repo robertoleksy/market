@@ -39,19 +39,24 @@ void c_user::sell()
 
 void c_user::add_money(unsigned int number_of, e_currency currency)
 {
+  std::cout << "(user "<< m_ID << ") add_money " << number_of;
   if (currency == e_currency::BTC) {
+    std::cout << " BTC" << std::endl;
     m_money_BTC.number_of += number_of;
   }
   if (currency == e_currency::USD) {
+    std::cout << " USD" << std::endl;
     m_money_USD.number_of += number_of;
   }
 }
 
 unsigned int c_user::get_money(unsigned int number_of, e_currency currency)
 {
+  std::cout << "(user " << m_ID << ") get_money ";
   if (currency == e_currency::BTC) {
     if(number_of < m_money_BTC.number_of) {
       m_money_BTC.number_of -= number_of;
+      std::cout << number_of << " BTC" << std::endl;
       return number_of;
     }
     else {
@@ -63,11 +68,13 @@ unsigned int c_user::get_money(unsigned int number_of, e_currency currency)
   if (currency == e_currency::USD) {
     if(number_of < m_money_USD.number_of) {
       m_money_USD.number_of -= number_of;
+      std::cout << number_of << " USD" << std::endl;
       return number_of;
     }
     else {
       unsigned int ret = m_money_USD.number_of;
       m_money_USD.number_of = 0;
+      std::cout << ret << " USD" << std::endl;
       return ret;
     }
   }

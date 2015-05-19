@@ -23,7 +23,7 @@ public:
   void sell(e_currency currency, unsigned int nuber_of, unsigned int ID, unsigned int price);
   unsigned int get_current_price();
   void add_user(std::shared_ptr<c_user> new_user);
-  void run(); // TODO thread
+  void run();
 private:
   struct s_bid {
     unsigned int ID;
