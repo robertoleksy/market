@@ -68,10 +68,7 @@ void c_market::run()
       << ' ' << it_first_sell->second.front().number_of_tokens << " tokens for " << m_last_price << std::endl;
       m_market_map_buy.erase(it_last_buy);
     }
-    it_last_buy = --m_market_map_buy.end();
-    it_first_sell = m_market_map_sell.begin();
-  }
-  else {
-    std::cout << "no transaction" << std::endl;
+      it_last_buy = --m_market_map_buy.end();
+      it_first_sell = m_market_map_sell.begin();
   }
 }
