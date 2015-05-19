@@ -34,7 +34,7 @@ void c_market::run()
   std::cout << "m_users_map size " << m_users_map.size() << std::endl;
   std::map<unsigned int, std::vector<s_bid>>::iterator it_last_buy = --m_market_map_buy.end();
   std::map<unsigned int, std::vector<s_bid>>::iterator it_first_sell = m_market_map_sell.begin();
-  while (it_last_buy->first >= it_first_sell->first) {
+  while (it_last_buy->first >= it_first_sell->first && !(m_market_map_buy.empty() || m_market_map_sell.empty())) {
     if (it_last_buy->second.front().number_of_tokens == it_first_sell->second.front().number_of_tokens) { // buy bid == sell bid
       std::cout << "add money for ID " << it_last_buy->second.front().ID << std::endl;
       std::cout << "add " << it_first_sell->second.front().number_of_tokens << "$" << std::endl;
@@ -65,5 +65,7 @@ void c_market::run()
       std::cout << "Done transaction: User " << it_last_buy->second.front().ID << " bought from User " << it_first_sell->second.front().ID 
       << ' ' << it_first_sell->second.front().number_of_tokens << " tokens for " << m_last_price << std::endl;
     }
+    it_last_buy = --m_market_map_buy.end();
+    it_first_sell = m_market_map_sell.begin();
   }
 }
