@@ -17,6 +17,7 @@ public:
   void add_money(unsigned int number_of, e_currency currency);
   unsigned int get_money(unsigned int number_of, e_currency currency);
   unsigned int get_ID();
+  int get_currency_stat(e_currency currency);
   void buy();
   void sell();
 private:

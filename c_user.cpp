@@ -92,3 +92,14 @@ unsigned int c_user::get_ID()
 {
   return m_ID;
 }
+
+int c_user::get_currency_stat(e_currency currency)
+{
+    if (currency == e_currency::BTC)
+      return m_money_BTC.number_of;
+    else if (currency == e_currency::USD)
+      return m_money_USD.number_of;
+    else
+      std::cout << "BAD CURRENCY" << std::endl;
+    return 0;
+}
