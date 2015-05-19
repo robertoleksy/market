@@ -30,22 +30,30 @@ void c_market::add_user(std::shared_ptr< c_user > new_user)
 
 void c_market::run()
 {
+  std::cout << "market run" << std::endl;
+  std::cout << "m_users_map size " << m_users_map.size() << std::endl;
   std::map<unsigned int, std::vector<s_bid>>::iterator it_last_buy = --m_market_map_buy.end();
   std::map<unsigned int, std::vector<s_bid>>::iterator it_first_sell = m_market_map_sell.begin();
   if (it_last_buy->first >= it_first_sell->first) {
     if (it_last_buy->second.front().number_of_tokens == it_first_sell->second.front().number_of_tokens) { // buy bid == sell bid
+      std::cout << "add money for ID " << it_last_buy->second.front().ID << std::endl;
+      std::cout << "add " << it_first_sell->second.front().number_of_tokens << "$" << std::endl;
       m_users_map.at(it_last_buy->second.front().ID)->add_money(it_first_sell->second.front().number_of_tokens, e_currency::USD);
       m_last_price = it_last_buy->first;
       m_market_map_buy.erase(it_last_buy);
       m_market_map_sell.erase(it_first_sell);
     }
     else if (it_last_buy->second.front().number_of_tokens > it_first_sell->second.front().number_of_tokens) { // buy bid > sell bid
+      std::cout << "add money for ID " << it_last_buy->second.front().ID <<std::endl;
+      std::cout << "add " << it_first_sell->second.front().number_of_tokens << "$" << std::endl;
       m_users_map.at(it_last_buy->second.front().ID)->add_money(it_first_sell->second.front().number_of_tokens, e_currency::USD);
       it_last_buy->second.front().number_of_tokens -= it_first_sell->second.front().number_of_tokens;
       m_last_price = it_last_buy->first;
       m_market_map_sell.erase(it_first_sell);
     }
     else { // buy bid < sell bid
+      std::cout << "add money for ID " << it_last_buy->second.front().ID <<std::endl;
+      std::cout << "add " << it_last_buy->second.front().number_of_tokens << std::endl;
       m_users_map.at(it_last_buy->second.front().ID)->add_money(it_last_buy->second.front().number_of_tokens, e_currency::USD);
       it_first_sell->second.front().number_of_tokens -= it_last_buy->second.front().number_of_tokens;
       m_last_price = it_last_buy->first;

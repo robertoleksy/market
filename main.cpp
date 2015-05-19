@@ -9,6 +9,7 @@ int main(int argc, char **argv) {
     std::vector<std::shared_ptr<c_user>> users_vector;
     for(int i = 0; i < 5; ++i) {
       std::shared_ptr<c_user> user_ptr(new c_user(i, market));
+      market->add_user(user_ptr);
       users_vector.emplace_back(std::move(user_ptr));
     }
     

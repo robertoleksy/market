@@ -3,6 +3,7 @@
 
 #include <map>
 #include <vector>
+#include <iostream>
 #include "c_user.h"
 
 enum class e_currency {
