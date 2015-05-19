@@ -42,8 +42,8 @@ void c_market::run()
   std::map<unsigned int, std::vector<s_bid>>::iterator it_first_sell = m_market_map_sell.begin();
   while (it_last_buy->first >= it_first_sell->first && (!(m_market_map_buy.empty() || m_market_map_sell.empty()))) {
     if (it_last_buy->second.front().number_of_tokens == it_first_sell->second.front().number_of_tokens) { // buy bid == sell bid
-      std::cout << "add money for ID " << it_last_buy->second.front().ID << std::endl;
-      std::cout << "add " << it_first_sell->second.front().number_of_tokens << "$" << std::endl;
+      //std::cout << "add money for ID " << it_last_buy->second.front().ID << std::endl;
+      //std::cout << "add " << it_first_sell->second.front().number_of_tokens << "$" << std::endl;
       m_users_map.at(it_last_buy->second.front().ID)->add_money(it_first_sell->second.front().number_of_tokens, e_currency::USD);
       m_last_price = it_last_buy->first;
 
@@ -54,8 +54,8 @@ void c_market::run()
       
     }
     else if (it_last_buy->second.front().number_of_tokens > it_first_sell->second.front().number_of_tokens) { // buy bid > sell bid
-      std::cout << "add money for ID " << it_last_buy->second.front().ID <<std::endl;
-      std::cout << "add " << it_first_sell->second.front().number_of_tokens << "$" << std::endl;
+      //std::cout << "add money for ID " << it_last_buy->second.front().ID <<std::endl;
+      //std::cout << "add " << it_first_sell->second.front().number_of_tokens << "$" << std::endl;
       m_users_map.at(it_last_buy->second.front().ID)->add_money(it_first_sell->second.front().number_of_tokens, e_currency::USD);
       it_last_buy->second.front().number_of_tokens -= it_first_sell->second.front().number_of_tokens;
       m_last_price = it_last_buy->first;
@@ -65,8 +65,8 @@ void c_market::run()
       m_market_map_sell.erase(it_first_sell);
     }
     else { // buy bid < sell bid
-      std::cout << "add money for ID " << it_last_buy->second.front().ID <<std::endl;
-      std::cout << "add " << it_last_buy->second.front().number_of_tokens << std::endl;
+//       std::cout << "add money for ID " << it_last_buy->second.front().ID <<std::endl;
+//       std::cout << "add " << it_last_buy->second.front().number_of_tokens << std::endl;
       m_users_map.at(it_last_buy->second.front().ID)->add_money(it_last_buy->second.front().number_of_tokens, e_currency::USD);
       it_first_sell->second.front().number_of_tokens -= it_last_buy->second.front().number_of_tokens;
       m_last_price = it_last_buy->first;
