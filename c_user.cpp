@@ -5,6 +5,8 @@ c_user::c_user(unsigned int ID, std::shared_ptr<c_market> market_ptr)
 m_ID(ID),
 m_market_ptr(market_ptr)
 {
+  std::random_device rd;
+  m_rand_generator = std::mt19937(rd());
   m_money_USD.currency = e_currency::USD;
   m_money_BTC.currency = e_currency::BTC;
   std::uniform_int_distribution<unsigned int> distribution(100000, 10000000);

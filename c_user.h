@@ -27,7 +27,7 @@ private:
   s_money m_money_BTC;
   unsigned int m_ID;
   std::shared_ptr<c_market> m_market_ptr;
-  std::default_random_engine m_rand_generator;
+  std::mt19937 m_rand_generator;
 
 };
 
