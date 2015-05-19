@@ -19,6 +19,7 @@ public:
   c_market() = default;
   c_market(const c_market & mark) = delete;
   c_market & operator = (const c_market &) = delete;
+  ~c_market();
   void buy(e_currency currency, unsigned int nuber_of, unsigned int ID, unsigned int price);
   void sell(e_currency currency, unsigned int nuber_of, unsigned int ID, unsigned int price);
   unsigned int get_current_price();

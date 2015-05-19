@@ -13,6 +13,7 @@ class c_user
 {
 public:
   c_user(unsigned int ID, std::shared_ptr<c_market> market_ptr);
+  ~c_user();
   void add_money(unsigned int number_of, e_currency currency);
   unsigned int get_money(unsigned int number_of, e_currency currency);
   unsigned int get_ID();
@@ -26,7 +27,7 @@ private:
   s_money m_money_USD;
   s_money m_money_BTC;
   unsigned int m_ID;
-  std::shared_ptr<c_market> m_market_ptr;
+  c_market *m_market_ptr;
   std::mt19937 m_rand_generator;
 
 };

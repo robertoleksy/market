@@ -3,7 +3,7 @@
 c_user::c_user(unsigned int ID, std::shared_ptr<c_market> market_ptr)
 :
 m_ID(ID),
-m_market_ptr(market_ptr)
+m_market_ptr(market_ptr.get())
 {
   std::random_device rd;
   m_rand_generator = std::mt19937(rd());
@@ -12,6 +12,11 @@ m_market_ptr(market_ptr)
   std::uniform_int_distribution<unsigned int> distribution(100000, 10000000);
   m_money_BTC.number_of = distribution(m_rand_generator);
   m_money_USD.number_of = distribution(m_rand_generator);
+}
+
+c_user::~c_user()
+{
+  std::cout << "user destructor" << std::endl;
 }
 
 void c_user::buy()

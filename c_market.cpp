@@ -1,5 +1,10 @@
 #include "c_market.h"
 
+c_market::~c_market()
+{
+  std::cout << "market destructor" << std::endl;
+}
+
 void c_market::buy(e_currency currency, unsigned int nuber_of, unsigned int ID, unsigned int price)
 {
   if (m_market_map_buy.find(price) == m_market_map_buy.end()) { // not found
@@ -32,9 +37,10 @@ void c_market::run()
 {
   std::cout << "market run" << std::endl;
   std::cout << "m_users_map size " << m_users_map.size() << std::endl;
-  std::map<unsigned int, std::vector<s_bid>>::iterator it_last_buy = --m_market_map_buy.end();
+  std::map<unsigned int, std::vector<s_bid>>::iterator it_last_buy = m_market_map_buy.end();
+  it_last_buy--;
   std::map<unsigned int, std::vector<s_bid>>::iterator it_first_sell = m_market_map_sell.begin();
-  while (it_last_buy->first >= it_first_sell->first && !(m_market_map_buy.empty() || m_market_map_sell.empty())) {
+  while (it_last_buy->first >= it_first_sell->first && (!(m_market_map_buy.empty() || m_market_map_sell.empty()))) {
     if (it_last_buy->second.front().number_of_tokens == it_first_sell->second.front().number_of_tokens) { // buy bid == sell bid
       std::cout << "add money for ID " << it_last_buy->second.front().ID << std::endl;
       std::cout << "add " << it_first_sell->second.front().number_of_tokens << "$" << std::endl;
@@ -68,7 +74,9 @@ void c_market::run()
       << ' ' << it_first_sell->second.front().number_of_tokens << " tokens for " << m_last_price << std::endl;
       m_market_map_buy.erase(it_last_buy);
     }
-      it_last_buy = --m_market_map_buy.end();
+      it_last_buy = m_market_map_buy.end();
+      it_last_buy--;
       it_first_sell = m_market_map_sell.begin();
+      
   }
 }
