@@ -18,8 +18,8 @@ public:
   unsigned int get_money(unsigned int number_of, e_currency currency);
   unsigned int get_ID();
   int get_currency_stat(e_currency currency);
-  void buy();
-  void sell();
+  void buy(); // only BTC
+  void sell(); // only BTC
 private:
   struct s_money {
     e_currency currency;

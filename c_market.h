@@ -30,11 +30,12 @@ private:
     unsigned int ID;
     unsigned int number_of_tokens;
   };
-  std::map<unsigned int, std::vector<s_bid>> m_market_map_sell;
+  std::map<unsigned int, std::vector<s_bid>> m_market_map_sell; // price => s_bid
   std::map<unsigned int, std::vector<s_bid>> m_market_map_buy;
   unsigned int m_last_price = 1000;
-  
-  std::map<unsigned int, std::shared_ptr<c_user>> m_users_map;
+  unsigned int m_number_of_btc = 0;
+  unsigned int m_number_of_usd = 0;
+  std::map<unsigned int, std::shared_ptr<c_user>> m_users_map; // ID => ptr
 };
 
 #endif // C_MARKET_H

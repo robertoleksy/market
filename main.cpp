@@ -15,8 +15,13 @@ int main(int argc, char **argv) {
     }
     
     
+    for(auto user : users_vector){
+      std::cout << "User " << user->get_ID() << "\n BTC: " << user->get_currency_stat(e_currency::BTC) 
+      << "\n USD: " << user->get_currency_stat(e_currency::USD) << std::endl;
+    }
+    
     std::chrono::time_point<std::chrono::steady_clock> start_time = std::chrono::steady_clock::now();
-    for (unsigned int j = 0; j < 1000; ++j) {
+    for (unsigned int j = 0; j < 1; ++j) {
       for (unsigned int i = 0; i < users_vector.size(); ++i) {
 	users_vector[i]->sell();
 	users_vector[(users_vector.size() - 1) - i]->buy();
@@ -30,12 +35,7 @@ int main(int argc, char **argv) {
     std::cout << "time: " << std::chrono::duration_cast<std::chrono::milliseconds>(diff) .count() << "ms" << std::endl;
     
     // Show users wallets
-    for(auto user : users_vector){
-      std::cout << "User " << user->get_ID() << "\n BTC: " << user->get_currency_stat(e_currency::BTC) 
-      << "\n USD: " << user->get_currency_stat(e_currency::USD) << std::endl;
-    }
     
-    market->run();
     
     for(auto user : users_vector){
       std::cout << "User " << user->get_ID() << "\n BTC: " << user->get_currency_stat(e_currency::BTC) 
