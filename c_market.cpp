@@ -62,8 +62,6 @@ void c_market::run()
     }
     
     else if (buyer_bid.number_of_tokens > seller_bid.number_of_tokens) { // tokens in buy bid > tokens in sell bid
-      //std::cout << "add money for ID " << it_last_buy->second.front().ID <<std::endl;
-      //std::cout << "add " << it_first_sell->second.front().number_of_tokens << "$" << std::endl;
       tokens_for_seller = buyer_bid.number_of_tokens;
       tokens_for_buyer = seller_bid.number_of_tokens - tokens_for_seller;
       it_last_buy->second.front().number_of_tokens -= tokens_for_seller;
@@ -72,14 +70,12 @@ void c_market::run()
       m_users_map.at(seller_bid.ID)->add_money(tokens_for_seller, e_currency::USD);
       m_last_price = it_last_buy->first;
       
-      std::cout << "Done transaction: User " << it_last_buy->second.front().ID << " bought from User " << it_first_sell->second.front().ID 
-      << ' ' << it_first_sell->second.front().number_of_tokens << " tokens for " << m_last_price << std::endl;
+      std::cout << "Done transaction: User " << buyer_bid.ID << " bought from User " << seller_bid.ID 
+      << ' ' << seller_bid.number_of_tokens << " tokens for " << m_last_price << std::endl;
       m_market_map_sell.erase(it_first_sell);
     }
     
     else { // tokens in buy bid < tokens in sell bid
-//       std::cout << "add money for ID " << it_last_buy->second.front().ID <<std::endl;
-//       std::cout << "add " << it_last_buy->second.front().number_of_tokens << std::endl;
       tokens_for_seller = buyer_bid.number_of_tokens;
       tokens_for_buyer = seller_bid.number_of_tokens - tokens_for_seller;
       it_first_sell->second.front().number_of_tokens -= tokens_for_seller;
@@ -92,6 +88,10 @@ void c_market::run()
       std::cout << "Done transaction: User " << it_last_buy->second.front().ID << " bought from User " << it_first_sell->second.front().ID 
       << ' ' << it_first_sell->second.front().number_of_tokens << " tokens for " << m_last_price << std::endl;
       m_market_map_buy.erase(it_last_buy);
+    }
+    
+    if (m_market_map_sell.empty() || m_market_map_buy.empty()) {
+      break;
     }
       it_last_buy = m_market_map_buy.end();
       it_last_buy--;
