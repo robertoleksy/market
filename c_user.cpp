@@ -16,7 +16,7 @@ m_market_ptr(market_ptr.get())
 
 c_user::~c_user()
 {
-  std::cout << "user destructor" << std::endl;
+  //std::cout << "user destructor" << std::endl;
 }
 
 void c_user::buy()
@@ -26,7 +26,7 @@ void c_user::buy()
   unsigned int price = std::floor(rand + 0.5);
   std::uniform_int_distribution<int> distribution_linear(10,20);
   unsigned int number_of_tokens = distribution_linear(m_rand_generator);
-  std::cout << "User " << m_ID << " want to buy " << number_of_tokens << "BTC for " << price << "USD" << std::endl;
+//   std::cout << "User " << m_ID << " want to buy " << number_of_tokens << "BTC for " << price << "USD" << std::endl;
   m_market_ptr->buy(e_currency::BTC, number_of_tokens, m_ID, price);
   
 }
@@ -39,31 +39,31 @@ void c_user::sell()
   std::uniform_int_distribution<int> distribution_linear(10,20);
   unsigned int number_of_tokens = distribution_linear(m_rand_generator);
   number_of_tokens = get_money(number_of_tokens, e_currency::BTC);
-  std::cout << "User " << m_ID << " want to sell " << number_of_tokens << "BTC for " << price << "USD" << std::endl;
+//   std::cout << "User " << m_ID << " want to sell " << number_of_tokens << "BTC for " << price << "USD" << std::endl;
   m_market_ptr->sell(e_currency::BTC, number_of_tokens, m_ID, price);  
   
 }
 
 void c_user::add_money(unsigned int number_of, e_currency currency)
 {
-  std::cout << "(user "<< m_ID << ") add_money " << number_of;
+//   std::cout << "(user "<< m_ID << ") add_money " << number_of;
   if (currency == e_currency::BTC) {
-    std::cout << " BTC" << std::endl;
+//     std::cout << " BTC" << std::endl;
     m_money_BTC.number_of += number_of;
   }
   if (currency == e_currency::USD) {
-    std::cout << " USD" << std::endl;
+//     std::cout << " USD" << std::endl;
     m_money_USD.number_of += number_of;
   }
 }
 
 unsigned int c_user::get_money(unsigned int number_of, e_currency currency)
 {
-  std::cout << "(user " << m_ID << ") get_money ";
+//   std::cout << "(user " << m_ID << ") get_money ";
   if (currency == e_currency::BTC) {
     if(number_of < m_money_BTC.number_of) {
       m_money_BTC.number_of -= number_of;
-      std::cout << number_of << " BTC" << std::endl;
+//       std::cout << number_of << " BTC" << std::endl;
       return number_of;
     }
     else {
@@ -75,13 +75,13 @@ unsigned int c_user::get_money(unsigned int number_of, e_currency currency)
   if (currency == e_currency::USD) {
     if(number_of < m_money_USD.number_of) {
       m_money_USD.number_of -= number_of;
-      std::cout << number_of << " USD" << std::endl;
+//       std::cout << number_of << " USD" << std::endl;
       return number_of;
     }
     else {
       unsigned int ret = m_money_USD.number_of;
       m_money_USD.number_of = 0;
-      std::cout << ret << " USD" << std::endl;
+//       std::cout << ret << " USD" << std::endl;
       return ret;
     }
   }
@@ -100,6 +100,6 @@ int c_user::get_currency_stat(e_currency currency)
     else if (currency == e_currency::USD)
       return m_money_USD.number_of;
     else
-      std::cout << "BAD CURRENCY" << std::endl;
-    return 0;
+//       std::cout << "BAD CURRENCY" << std::endl;
+    return -1;
 }

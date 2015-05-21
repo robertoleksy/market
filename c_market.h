@@ -25,6 +25,7 @@ public:
   unsigned int get_current_price();
   void add_user(std::shared_ptr<c_user> new_user);
   void run();
+  unsigned int get_number_of_transactions();
 private:
   struct s_bid {
     unsigned int ID;
@@ -36,6 +37,7 @@ private:
   unsigned int m_number_of_btc = 0;
   unsigned int m_number_of_usd = 0;
   std::map<unsigned int, std::shared_ptr<c_user>> m_users_map; // ID => ptr
+  unsigned int m_number_of_transactions = 0;
 };
 
 #endif // C_MARKET_H

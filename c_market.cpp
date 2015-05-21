@@ -2,7 +2,7 @@
 
 c_market::~c_market()
 {
-  std::cout << "market destructor" << std::endl;
+//   std::cout << "market destructor" << std::endl;
 }
 
 void c_market::buy(e_currency currency, unsigned int nuber_of, unsigned int ID, unsigned int price)
@@ -36,8 +36,8 @@ void c_market::add_user(std::shared_ptr< c_user > new_user)
 
 void c_market::run()
 {
-  std::cout << "market run" << std::endl;
-  std::cout << "m_users_map size " << m_users_map.size() << std::endl;
+//   std::cout << "market run" << std::endl;
+//   std::cout << "m_users_map size " << m_users_map.size() << std::endl;
   std::map<unsigned int, std::vector<s_bid>>::iterator it_last_buy = m_market_map_buy.end();
   it_last_buy--;
   std::map<unsigned int, std::vector<s_bid>>::iterator it_first_sell = m_market_map_sell.begin();
@@ -54,8 +54,8 @@ void c_market::run()
       m_users_map.at(seller_bid.ID)->add_money(tokens_for_seller, e_currency::USD);
       m_last_price = it_last_buy->first;
 
-      std::cout << "Done transaction: User " << it_last_buy->second.front().ID << " bought from User " << it_first_sell->second.front().ID 
-      << ' ' << it_first_sell->second.front().number_of_tokens << " tokens for " << m_last_price << std::endl;
+//       std::cout << "Done transaction: User " << it_last_buy->second.front().ID << " bought from User " << it_first_sell->second.front().ID 
+//       << ' ' << it_first_sell->second.front().number_of_tokens << " tokens for " << m_last_price << std::endl;
       m_market_map_buy.erase(it_last_buy);
       m_market_map_sell.erase(it_first_sell);
       
@@ -70,8 +70,8 @@ void c_market::run()
       m_users_map.at(seller_bid.ID)->add_money(tokens_for_seller, e_currency::USD);
       m_last_price = it_last_buy->first;
       
-      std::cout << "Done transaction: User " << buyer_bid.ID << " bought from User " << seller_bid.ID 
-      << ' ' << seller_bid.number_of_tokens << " tokens for " << m_last_price << std::endl;
+//       std::cout << "Done transaction: User " << buyer_bid.ID << " bought from User " << seller_bid.ID 
+//       << ' ' << seller_bid.number_of_tokens << " tokens for " << m_last_price << std::endl;
       m_market_map_sell.erase(it_first_sell);
     }
     
@@ -85,11 +85,11 @@ void c_market::run()
       m_users_map.at(seller_bid.ID)->add_money(tokens_for_seller, e_currency::USD);
       
       m_last_price = it_last_buy->first;
-      std::cout << "Done transaction: User " << it_last_buy->second.front().ID << " bought from User " << it_first_sell->second.front().ID 
-      << ' ' << it_first_sell->second.front().number_of_tokens << " tokens for " << m_last_price << std::endl;
+//       std::cout << "Done transaction: User " << it_last_buy->second.front().ID << " bought from User " << it_first_sell->second.front().ID 
+//       << ' ' << it_first_sell->second.front().number_of_tokens << " tokens for " << m_last_price << std::endl;
       m_market_map_buy.erase(it_last_buy);
     }
-    
+    ++m_number_of_transactions;
     if (m_market_map_sell.empty() || m_market_map_buy.empty()) {
       break;
     }
@@ -98,4 +98,9 @@ void c_market::run()
       it_first_sell = m_market_map_sell.begin();
       
   }
+}
+
+unsigned int c_market::get_number_of_transactions()
+{
+  return m_number_of_transactions;
 }
