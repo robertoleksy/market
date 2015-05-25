@@ -6,7 +6,7 @@ m_ID(ID),
 m_market_ptr(market_ptr.get())
 {
   std::random_device rd;
-  m_rand_generator = std::mt19937(rd());
+  m_rand_generator = std::minstd_rand0(rd());
   m_money_USD.currency = e_currency::USD;
   m_money_BTC.currency = e_currency::BTC;
   std::uniform_int_distribution<unsigned int> distribution(50, 100);

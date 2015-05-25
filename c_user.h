@@ -4,6 +4,8 @@
 #include <random>
 #include <memory>
 #include <iostream>
+#include <ctime>
+#include <cstdlib>
 #include "c_market.h"
 
 class c_market;
@@ -29,7 +31,7 @@ private:
   s_money m_money_BTC;
   unsigned int m_ID;
   c_market *m_market_ptr;
-  std::mt19937 m_rand_generator;
+  std::minstd_rand0 m_rand_generator;
 
 };
 
